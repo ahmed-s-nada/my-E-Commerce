@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="mybg1">
+{% if not items %}
+    <h1>{{header}}</h1>
+    <h2>{{ahmed}}</h2>
+    <h3>{{joe}}</h3>
+  {% else %}
+    <h1>Cart-{{id}}</h1>
+    {% for i in  items%}
+    <h3>{{i.name}} ==> {{i.price}}</h3>
+    <form class=" my-6 my-lg-2" method="post" action="{% url 'Cart:Update' %}">{% csrf_token %}
+      <input type="hidden" name="product_id" value="{{i.id}}">
+        <button class="btn btn-outline-danger my-5 my-sm-2" type="submit">Remove from cart </button>
+    </form>
+    {% endfor %}
+    <hr>
+    <h3>Subtotal= {{sub_total}}</h3>
+    <hr>
+    <h2>Total = {{total}}</h2>
+    <hr>
+    {% if items.count > 0 %}
+      <form class=" my-6 my-lg-2" method="post" action="{% url 'Cart:Checkout' %}">{% csrf_token %}
+          <button class="btn btn-outline-success my-5 my-sm-2" type="submit">Checkout </button>
+    {% endif %}
+    </form>
+
+
+{% endif %}
+  </div>
+{% endblock %}

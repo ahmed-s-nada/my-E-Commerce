@@ -1,0 +1,35 @@
+{% extends "Product/product_base.html" %}
+
+{% block content %}
+  <div class="">
+    <h1>{{header}}</h1>
+    <h2 class="text-center">{{ahmed}}</h2>
+    {% if q %}
+      <div class="col-12 mb-3">
+        <h3>searched for: "{{q}}"</h3>
+
+      </div>
+    {% endif %}
+    <hr>
+    <div class="container">
+      <div class="row">
+        {% for p in  product_list%}
+          <div class="col">
+            <div class="card bg-dark text-white text-center" style="width: 18rem;">
+              <img class="card-img-top" src="{{p.main_image.url}}" alt="Card image cap">
+              <div class="card-body">
+                <div class="card-title"><a href="single/{{p.slug}}"><h4>{{p.name}}</h4> <h5>Price = {{p.price}}</h5></a></div>
+                <p class="card-text">{{p.discription|truncatewords:12}}</p>
+                <a href="{{p.get_abolute_url}}" class="btn btn-warning text-center">Go to details</a>
+              </div>
+            </div>
+
+          </div>
+          <br>
+        {% endfor %}
+      </div>
+    </div>
+
+
+  </div>
+{% endblock %}
